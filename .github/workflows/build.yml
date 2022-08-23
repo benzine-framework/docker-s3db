@@ -19,5 +19,5 @@ jobs:
       - name: Bake
         uses: docker/bake-action@v2.1.0
         with:
-          #files: bake.yml
+          files: bake.hcl
           push: true
