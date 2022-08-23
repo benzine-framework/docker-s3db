@@ -21,6 +21,9 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_PASSWORD }}
       - uses: php-actions/composer@v6
+        with:
+          php_version: 8.1
+          args: --ignore-platform-reqs
       - name: Bake
         uses: docker/bake-action@v2.1.0
         with:
