@@ -51,5 +51,6 @@ VOLUME /dumps
 WORKDIR /sync
 COPY . /sync
 ENV PATH="/sync:${PATH}"
-RUN chmod +x /sync/sync /etc/service/*/run
+RUN chmod +x /sync/sync /etc/service/*/run /sync/healthcheck
 CMD ["start.sh"]
+HEALTHCHECK --start-period=30s CMD /sync/healthcheck
