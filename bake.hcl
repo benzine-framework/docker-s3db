@@ -17,7 +17,7 @@ target "postgres-13" {
   context = "."
   dockerfile = "Dockerfile"
   platforms = ["arm64","amd64"]
-  tags = ["benzine/postgres:13", "benzine/postgres:latest"]
+  tags = ["benzine/postgres:13"]
   args = {
     PGSQL_VERSION = 13
   }
