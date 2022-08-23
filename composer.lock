@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cb65968236e13f317b1a5db79f853c52",
+    "content-hash": "9e33df3b624d4c411ab342f127b432cd",
     "packages": [
         {
             "name": "adambrett/shell-wrapper",
@@ -108,16 +108,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.233.6",
+            "version": "3.234.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "cd9019a38cee8cabfd42dc7692e54106c93c1e6a"
+                "reference": "d2113f1e5ec9f7f19de2472f5063333b39a55280"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/cd9019a38cee8cabfd42dc7692e54106c93c1e6a",
-                "reference": "cd9019a38cee8cabfd42dc7692e54106c93c1e6a",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/d2113f1e5ec9f7f19de2472f5063333b39a55280",
+                "reference": "d2113f1e5ec9f7f19de2472f5063333b39a55280",
                 "shasum": ""
             },
             "require": {
@@ -194,9 +194,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.233.6"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.234.0"
             },
-            "time": "2022-08-19T18:16:02+00:00"
+            "time": "2022-08-22T18:20:42+00:00"
         },
         {
             "name": "bramus/ansi-php",
@@ -612,6 +612,58 @@
             "time": "2022-06-20T21:43:11+00:00"
         },
         {
+            "name": "jimmiw/php-time-ago",
+            "version": "3.2.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jimmiw/php-time-ago.git",
+                "reference": "2e0da84d3bd35344f44582ea78c85c75d937c457"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jimmiw/php-time-ago/zipball/2e0da84d3bd35344f44582ea78c85c75d937c457",
+                "reference": "2e0da84d3bd35344f44582ea78c85c75d937c457",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0.0"
+            },
+            "require-dev": {
+                "phpmd/phpmd": "@stable",
+                "phpunit/phpunit": "^6",
+                "squizlabs/php_codesniffer": "^3.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Westsworld\\": "src/Westsworld/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jimmi Westerberg",
+                    "homepage": "http://www.westsworld.dk",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Simple module, that displays the date in a \"time ago\" format",
+            "homepage": "https://github.com/jimmiw/php-time-ago",
+            "keywords": [
+                "distance of time",
+                "time ago",
+                "time ago in words"
+            ],
+            "support": {
+                "issues": "https://github.com/jimmiw/php-time-ago/issues",
+                "source": "https://github.com/jimmiw/php-time-ago/tree/3.2.3"
+            },
+            "time": "2022-06-10T10:15:42+00:00"
+        },
+        {
             "name": "kint-php/kint",
             "version": "3.3",
             "source": {
@@ -900,6 +952,41 @@
                 }
             ],
             "time": "2022-04-17T13:12:02+00:00"
+        },
+        {
+            "name": "matthewbaggett/wait-for-mysql",
+            "version": "v1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/matthewbaggett/wait-for-mysql.git",
+                "reference": "fa8786e752aa77aacf79a8e40df8b84eacde7770"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/matthewbaggett/wait-for-mysql/zipball/fa8786e752aa77aacf79a8e40df8b84eacde7770",
+                "reference": "fa8786e752aa77aacf79a8e40df8b84eacde7770",
+                "shasum": ""
+            },
+            "bin": [
+                "wait-for-mysql",
+                "wait-for-postgresql"
+            ],
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Matthew Baggett",
+                    "email": "matthew@baggett.me"
+                }
+            ],
+            "support": {
+                "issues": "https://github.com/matthewbaggett/wait-for-mysql/issues",
+                "source": "https://github.com/matthewbaggett/wait-for-mysql/tree/v1.1"
+            },
+            "time": "2021-09-22T09:25:08+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -1317,6 +1404,55 @@
                 "source": "https://github.com/ralouphie/getallheaders/tree/develop"
             },
             "time": "2019-03-08T08:55:37+00:00"
+        },
+        {
+            "name": "rych/bytesize",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rchouinard/bytesize.git",
+                "reference": "297e16ea047461b91e8d7eb90aa46aaa52917824"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rchouinard/bytesize/zipball/297e16ea047461b91e8d7eb90aa46aaa52917824",
+                "reference": "297e16ea047461b91e8d7eb90aa46aaa52917824",
+                "shasum": ""
+            },
+            "require": {
+                "ext-bcmath": "*",
+                "php": ">=5.3.4"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.7.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Rych\\ByteSize\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ryan Chouinard",
+                    "email": "rchouinard@gmail.com",
+                    "homepage": "http://ryanchouinard.com"
+                }
+            ],
+            "description": "Utility component for nicely formatted file sizes.",
+            "homepage": "https://github.com/rchouinard/bytesize",
+            "keywords": [
+                "filesize"
+            ],
+            "support": {
+                "issues": "https://github.com/rchouinard/bytesize/issues",
+                "source": "https://github.com/rchouinard/bytesize/tree/master"
+            },
+            "time": "2014-04-04T18:06:18+00:00"
         },
         {
             "name": "spatie/emoji",

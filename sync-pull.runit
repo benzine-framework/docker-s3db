@@ -1,0 +1,8 @@
+#!/bin/bash
+
+sleep 10
+echo "Running sync-pull"
+vendor/bin/wait-for-postgres
+/sync/sync --pull
+
+sleep infinity

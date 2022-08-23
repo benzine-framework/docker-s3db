@@ -12,7 +12,10 @@
         "monolog/monolog": "^2.2",
         "bramus/monolog-colored-line-formatter": "~3.0",
         "adambrett/shell-wrapper": "dev-master",
-        "spatie/emoji": "^2.3"
+        "spatie/emoji": "^2.3",
+        "rych/bytesize": "^1.0",
+        "jimmiw/php-time-ago": "^3.2",
+        "matthewbaggett/wait-for-mysql": "^1.0"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.0"

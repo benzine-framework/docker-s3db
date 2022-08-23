@@ -1,8 +1,9 @@
 <?php
+
 $finder = PhpCsFixer\Finder::create();
 $finder->in(__DIR__);
 
-return (new PhpCsFixer\Config)
+return (new PhpCsFixer\Config())
     ->setRiskyAllowed(true)
     ->setHideProgress(false)
     ->setRules([
@@ -19,4 +20,4 @@ return (new PhpCsFixer\Config)
         'yoda_style' => false,
     ])
     ->setFinder($finder)
-    ;
+;

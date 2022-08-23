@@ -36,12 +36,20 @@ RUN apk --no-cache --repository https://dl-cdn.alpinelinux.org/alpine/edge/main 
         php81-fpm \
         php81-sodium \
         php81-tokenizer \
+        php81-fileinfo \
+        php81-simplexml \
         # Iconv Fix
         php81-pecl-apcu \
+        ncurses \
+        xz \
     && ln -s /usr/bin/php81 /usr/bin/php
 COPY start.sh /usr/local/bin/start.sh
 COPY postgres.runit /etc/service/postgres/run
+COPY sync-pull.runit /etc/service/sync-pull/run
+COPY sync-push.runit /etc/service/sync-push/run
+VOLUME /dumps
 WORKDIR /sync
 COPY . /sync
-RUN chmod +x /sync/sync
+ENV PATH="/sync:${PATH}"
+RUN chmod +x /sync/sync /etc/service/*/run
 CMD ["start.sh"]
