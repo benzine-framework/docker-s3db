@@ -12,8 +12,8 @@ class StorageFilesystem extends Filesystem
     {
         $environment = array_merge($_ENV, $_SERVER);
         $s3Adapter = new AwsS3V3Adapter(
-            new S3Client([
-                'endpoint' => $environment['S3_ENDPOINT'],
+            new S3Client(array_filter([
+                'endpoint' => $environment['S3_ENDPOINT'] ?? null,
                 'use_path_style_endpoint' => isset($environment['S3_USE_PATH_STYLE_ENDPOINT']),
                 'credentials' => [
                     'key' => $environment['S3_API_KEY'],
@@ -21,7 +21,7 @@ class StorageFilesystem extends Filesystem
                 ],
                 'region' => $environment['S3_REGION'] ?? 'us-east',
                 'version' => 'latest',
-            ]),
+            ])),
             $environment['S3_BUCKET'],
             $environment['S3_PREFIX'] ?? null
         );
