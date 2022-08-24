@@ -30,8 +30,15 @@ abstract class AbstractSyncer
             return $a->lastModified() < $b->lastModified();
         });
 
+        $showLimit = 5;
+        $this->logger->debug(sprintf(
+            '%s Found %d dumps. Showing the last %d',
+            Emoji::magnifyingGlassTiltedLeft(),
+            count($filesInS3),
+            $showLimit
+        ));
         /** @var FileAttributes $file */
-        foreach ($filesInS3 as $file) {
+        foreach (array_slice($filesInS3, 0, $showLimit) as $file) {
             $this->logger->debug(sprintf(
                 '%s Found %s. It is %s and was created %s',
                 Emoji::magnifyingGlassTiltedLeft(),
@@ -62,6 +69,7 @@ abstract class AbstractSyncer
 
         return $localDownloadedFile;
     }
+
     protected function upload(string $remoteStorageFile, string $localCompressedDumpFile): void
     {
         $startUpload = microtime(true);
