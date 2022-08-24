@@ -69,7 +69,7 @@ abstract class AbstractSyncer
             $remoteStorageFile,
             $this->localFilesystem->readStream($localCompressedDumpFile)
         );
-        $this->logger->debug(sprintf(
+        $this->logger->info(sprintf(
             'Uploaded %s as %s to S3 in %s seconds',
             $localCompressedDumpFile,
             $remoteStorageFile,

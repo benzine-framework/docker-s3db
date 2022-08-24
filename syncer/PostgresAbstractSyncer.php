@@ -27,6 +27,20 @@ class PostgresAbstractSyncer extends AbstractSyncer
             )
         ));
 
+        // Checksum dump and don't upload if the checksum is the same as last time.
+        $hash = sha1_file("/dumps/{$dumpFile}");
+        if ($this->localFilesystem->has('previous_hash') && $hash == $this->localFilesystem->read('previous_hash')) {
+            $this->logger->debug(sprintf(
+                '%s Dump of %s matches previous dump (%s), not uploading the same file again.',
+                Emoji::abacus(),
+                $dumpFile,
+                substr($hash, 0, 7)
+            ));
+
+            exit;
+        }
+        $this->localFilesystem->write('previous_hash', $hash);
+
         // XZ compress dump
         $compressedDumpFile = $this->compress($dumpFile);
 
