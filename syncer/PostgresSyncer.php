@@ -5,7 +5,7 @@ namespace S3DB\Sync;
 use Rych\ByteSize\ByteSize;
 use Spatie\Emoji\Emoji;
 
-class PostgresAbstractSyncer extends AbstractSyncer
+class PostgresSyncer extends AbstractSyncer
 {
     public function push(): void
     {

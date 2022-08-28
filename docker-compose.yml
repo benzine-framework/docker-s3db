@@ -25,6 +25,7 @@ services:
     image: benzine/postgres:14
     build:
       context: .
+      dockerfile: Dockerfile.postgres
       target: postgres
       args:
         PGSQL_VERSION: 14
@@ -39,6 +40,32 @@ services:
       S3_PREFIX: "test/postgres/"
     ports:
       - "127.0.0.127:5432:5432"
+    depends_on:
+      - minio
+    volumes:
+      - ./:/sync
+
+  mariadb-10.9:
+    image: benzine/mysql:10.9
+    build:
+      context: .
+      target: mysql
+      dockerfile: Dockerfile.mariadb
+      args:
+        MARIADB_VERSION: 10.9
+    environment:
+      MARIADB_RANDOM_ROOT_PASSWORD: "yes"
+      MARIADB_USER: example
+      MARIADB_PASSWORD: changeme
+      MARIADB_DATABASE: s3db
+      S3_ENDPOINT: http://minio:9000/
+      S3_API_KEY: *s3_key
+      S3_API_SECRET: *s3_secret
+      S3_USE_PATH_STYLE_ENDPOINT: "yes"
+      S3_BUCKET: "s3db"
+      S3_PREFIX: "test/mariadb/"
+    ports:
+      - "127.0.0.127:3306:3306"
     depends_on:
       - minio
     volumes:

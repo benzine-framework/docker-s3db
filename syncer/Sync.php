@@ -46,11 +46,10 @@ class Sync
             // Postgres mode is enabled if --postgres is set, or PG_VERSION envvar is set,
             // which it is when we're built ontop of the postgres docker container
             $this->logger->debug(sprintf('%s Starting in postgres mode', Emoji::CHARACTER_HOURGLASS_NOT_DONE));
-            $this->syncer = new PostgresAbstractSyncer($this->logger, $this->storageFilesystem, $this->localFilesystem);
-        } elseif ($this->args->hasOpt('mysql')) {
+            $this->syncer = new PostgresSyncer($this->logger, $this->storageFilesystem, $this->localFilesystem);
+        } elseif ($this->args->hasOpt('mysql') || isset($environment['MARIADB_VERSION'])) {
             $this->logger->debug(sprintf('%s Starting in mysql mode', Emoji::CHARACTER_HOURGLASS_NOT_DONE));
-
-            exit('Not implemented yet');
+            $this->syncer = new MysqlSyncer($this->logger, $this->storageFilesystem, $this->localFilesystem);
         } else {
             $this->logger->critical(sprintf('%s Must be started in either --mysql or --postgres mode!', Emoji::CHARACTER_NERD_FACE));
 

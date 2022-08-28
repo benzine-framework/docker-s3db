@@ -1,7 +1,7 @@
 ARG PGSQL_VERSION
 FROM postgres:$PGSQL_VERSION-alpine AS postgres
-RUN apk add --no-cache runit
-RUN apk --no-cache --repository https://dl-cdn.alpinelinux.org/alpine/edge/main add \
+RUN apk add --no-cache runit && \
+    apk --no-cache --repository https://dl-cdn.alpinelinux.org/alpine/edge/main add \
       icu-libs \
       &&\
     apk --no-cache --repository https://dl-cdn.alpinelinux.org/alpine/edge/community add \
@@ -49,8 +49,12 @@ COPY sync-pull.runit /etc/service/sync-pull/run
 COPY sync-push.runit /etc/service/sync-push/run
 VOLUME /dumps
 WORKDIR /sync
-COPY . /sync
+COPY vendor /sync/vendor
+COPY syncer /sync/syncer
+COPY sync /sync/sync
+COPY start.sh /sync/start.sh
 ENV PATH="/sync:${PATH}"
-RUN chmod +x /sync/sync /etc/service/*/run /sync/healthcheck
 CMD ["start.sh"]
-HEALTHCHECK --start-period=30s CMD /sync/healthcheck
+COPY postgres_healthcheck /sync/postgres_healthcheck
+HEALTHCHECK --start-period=30s CMD /sync/postgres_healthcheck
+RUN ln -s /sync/vendor/bin/wait-for-postgresql /usr/local/bin/wait-for-database
