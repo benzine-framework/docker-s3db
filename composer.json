@@ -31,5 +31,10 @@
             "name": "Matthew Baggett",
             "email": "matthew@baggett.me"
         }
-    ]
+    ],
+    "config": {
+        "preferred-install": {
+            "*": "dist"
+        }
+    }
 }

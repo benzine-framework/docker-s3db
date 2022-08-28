@@ -9,7 +9,8 @@ RUN apk add --no-cache runit && \
     libavif \
     && \
     apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing/ --allow-untrusted gnu-libiconv \
-        # Packages
+        # Packages \
+        curl \
         tini \
         php81 \
         php81-dev \
@@ -42,14 +43,16 @@ RUN apk add --no-cache runit && \
         php81-pecl-apcu \
         ncurses \
         xz \
-    && ln -s /usr/bin/php81 /usr/bin/php
+    && ln -s /usr/bin/php81 /usr/bin/php \
+RUN curl https://getcomposer.org/composer-stable.phar --output /usr/local/bin/composer && \
+    chmod +x /usr/local/bin/composer
 COPY start.sh /usr/local/bin/start.sh
 COPY postgres.runit /etc/service/postgres/run
 COPY sync-pull.runit /etc/service/sync-pull/run
 COPY sync-push.runit /etc/service/sync-push/run
 VOLUME /dumps
 WORKDIR /sync
-COPY vendor /sync/vendor
+COPY composer.* /sync
 COPY syncer /sync/syncer
 COPY sync /sync/sync
 COPY start.sh /sync/start.sh
