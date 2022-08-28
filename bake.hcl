@@ -1,17 +1,17 @@
 group "default" {
   targets = [
-    "postgres-14",
-    "postgres-13",
-    "postgres-12",
-    "postgres-11",
-    "postgres-10",
+    #"postgres-14",
+    #"postgres-13",
+    #"postgres-12",
+    #"postgres-11",
+    #"postgres-10",
     "mariadb-10-9",
-    "mariadb-10-8",
-    "mariadb-10-7",
-    "mariadb-10-6",
-    "mariadb-10-5",
-    "mariadb-10-4",
-    "mariadb-10-3",
+    #"mariadb-10-8",
+    #"mariadb-10-7",
+    #"mariadb-10-6",
+    #"mariadb-10-5",
+    #"mariadb-10-4",
+    #"mariadb-10-3",
   ]
 }
 
