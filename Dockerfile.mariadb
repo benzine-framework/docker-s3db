@@ -52,6 +52,7 @@ COPY composer.* /sync/
 COPY syncer /sync/syncer
 COPY sync /sync/sync
 COPY start.sh /sync/start.sh
+RUN composer install
 ENV PATH="/sync:${PATH}"
 RUN chmod +x /sync/sync /etc/service/*/run
 CMD ["start.sh"]

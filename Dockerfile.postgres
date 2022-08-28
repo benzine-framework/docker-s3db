@@ -58,6 +58,7 @@ COPY sync /sync/sync
 COPY start.sh /sync/start.sh
 ENV PATH="/sync:${PATH}"
 CMD ["start.sh"]
+RUN composer install
 COPY postgres_healthcheck /sync/postgres_healthcheck
 HEALTHCHECK --start-period=30s CMD /sync/postgres_healthcheck
 RUN ln -s /sync/vendor/bin/wait-for-postgresql /usr/local/bin/wait-for-database
