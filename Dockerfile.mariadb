@@ -55,5 +55,5 @@ COPY start.sh /sync/start.sh
 ENV PATH="/sync:${PATH}"
 RUN chmod +x /sync/sync /etc/service/*/run
 CMD ["start.sh"]
-HEALTHCHECK --start-period=30s CMD /usr/local/bin/healthcheck.sh
+HEALTHCHECK --start-period=30s CMD /usr/local/bin/healthcheck.sh --connect
 RUN ln -s /sync/vendor/bin/wait-for-mysql /usr/local/bin/wait-for-database
