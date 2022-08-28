@@ -53,7 +53,7 @@ services:
       dockerfile: Dockerfile.mariadb
       args:
         MARIADB_VERSION: 10.9
-    environment:
+    environment: &mariadb
       MARIADB_RANDOM_ROOT_PASSWORD: "yes"
       MARIADB_USER: example
       MARIADB_PASSWORD: changeme
@@ -80,16 +80,7 @@ services:
       args:
         MARIADB_VERSION: 10.3
     environment:
-      MARIADB_RANDOM_ROOT_PASSWORD: "yes"
-      MARIADB_USER: example
-      MARIADB_PASSWORD: changeme
-      MARIADB_DATABASE: s3db
-      S3_ENDPOINT: http://minio:9000/
-      S3_API_KEY: *s3_key
-      S3_API_SECRET: *s3_secret
-      S3_USE_PATH_STYLE_ENDPOINT: "yes"
-      S3_BUCKET: "s3db"
-      S3_PREFIX: "test/mariadb/"
+      <<: *mariadb
     ports:
       - "127.0.0.127:3306:3306"
     depends_on:
