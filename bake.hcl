@@ -4,7 +4,14 @@ group "default" {
     "postgres-13",
     "postgres-12",
     "postgres-11",
-    "postgres-10"
+    "postgres-10",
+    "mariadb-10-9",
+    "mariadb-10-8",
+    "mariadb-10-7",
+    "mariadb-10-6",
+    "mariadb-10-5",
+    "mariadb-10-4",
+    "mariadb-10-3",
   ]
 }
 
@@ -58,7 +65,7 @@ target "postgres-10" {
   }
 }
 
-target "mariadb-10.9" {
+target "mariadb-10-9" {
   context = "."
   dockerfile = "Dockerfile.mariadb"
   platforms = ["arm64", "amd64"]
@@ -67,7 +74,7 @@ target "mariadb-10.9" {
     MARIADB_VERSION=10.9
   }
 }
-target "mariadb-10.8" {
+target "mariadb-10-8" {
   context = "."
   dockerfile = "Dockerfile.mariadb"
   platforms = ["arm64", "amd64"]
@@ -76,7 +83,7 @@ target "mariadb-10.8" {
     MARIADB_VERSION=10.8
   }
 }
-target "mariadb-10.7" {
+target "mariadb-10-7" {
   context = "."
   dockerfile = "Dockerfile.mariadb"
   platforms = ["arm64", "amd64"]
@@ -85,7 +92,7 @@ target "mariadb-10.7" {
     MARIADB_VERSION=10.7
   }
 }
-target "mariadb-10.6" {
+target "mariadb-10-6" {
   context = "."
   dockerfile = "Dockerfile.mariadb"
   platforms = ["arm64", "amd64"]
@@ -94,7 +101,7 @@ target "mariadb-10.6" {
     MARIADB_VERSION=10.6
   }
 }
-target "mariadb-10.5" {
+target "mariadb-10-5" {
   context = "."
   dockerfile = "Dockerfile.mariadb"
   platforms = ["arm64", "amd64"]
@@ -103,7 +110,7 @@ target "mariadb-10.5" {
     MARIADB_VERSION=10.5
   }
 }
-target "mariadb-10.4" {
+target "mariadb-10-4" {
   context = "."
   dockerfile = "Dockerfile.mariadb"
   platforms = ["arm64", "amd64"]
@@ -112,7 +119,7 @@ target "mariadb-10.4" {
     MARIADB_VERSION=10.4
   }
 }
-target "mariadb-10.3" {
+target "mariadb-10-3" {
   context = "."
   dockerfile = "Dockerfile.mariadb"
   platforms = ["arm64", "amd64"]
