@@ -1,6 +1,9 @@
 ARG MARIADB_VERSION=10.9
 FROM mariadb:$MARIADB_VERSION AS mysql
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+ENV DEBIAN_FRONTEND="teletype" \
+    TERM=xterm-256color \
+    COMPOSER_ALLOW_SUPERUSER=1
 RUN echo "APT::Acquire::Retries \"5\";" > /etc/apt/apt.conf.d/80-retries && \
     echo "Acquire::http::No-Cache=true;" > /etc/apt/apt.conf.d/80-no-cache && \
     echo "Acquire::http::Pipeline-Depth=0;" > /etc/apt/apt.conf.d/80-no-pipeline && \
