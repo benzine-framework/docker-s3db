@@ -51,6 +51,7 @@ COPY start.sh /usr/local/bin/start.sh
 COPY postgres.runit /etc/service/postgres/run
 COPY sync-pull.runit /etc/service/sync-pull/run
 COPY sync-push.runit /etc/service/sync-push/run
+COPY sync-prune.runit /etc/service/sync-prune/run
 VOLUME /dumps
 WORKDIR /sync
 COPY composer.* /sync/

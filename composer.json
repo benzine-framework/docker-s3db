@@ -3,19 +3,20 @@
     "type": "project",
     "require": {
         "php": ">8.1",
-        "ext-json": "*",
         "ext-curl": "*",
-        "kint-php/kint": "^3",
-        "league/flysystem-aws-s3-v3": "^3.2",
-        "league/flysystem": "^3.2",
-        "vanilla/garden-cli": "~2.0",
-        "monolog/monolog": "^2.2",
-        "bramus/monolog-colored-line-formatter": "~3.0",
+        "ext-json": "*",
         "adambrett/shell-wrapper": "dev-master",
-        "spatie/emoji": "^2.3",
-        "rych/bytesize": "^1.0",
+        "bramus/monolog-colored-line-formatter": "~3.0",
         "jimmiw/php-time-ago": "^3.2",
-        "matthewbaggett/wait-for-mysql": "dev-main"
+        "kint-php/kint": "^3",
+        "league/flysystem": "^3.2",
+        "league/flysystem-aws-s3-v3": "^3.2",
+        "matthewbaggett/wait-for-mysql": "dev-main",
+        "monolog/monolog": "^2.2",
+        "nesbot/carbon": "^2.62",
+        "rych/bytesize": "^1.0",
+        "spatie/emoji": "^2.3",
+        "vanilla/garden-cli": "~2.0"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.0"
@@ -33,6 +34,7 @@
         }
     ],
     "config": {
+        "sort-packages": true,
         "preferred-install": {
             "*": "dist"
         }

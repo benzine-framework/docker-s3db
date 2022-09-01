@@ -2,7 +2,9 @@
 
 namespace S3DB\Sync;
 
+use Carbon\Carbon;
 use League\Flysystem\FileAttributes;
+use League\Flysystem\FilesystemReader;
 use Monolog\Logger;
 use Rych\ByteSize\ByteSize;
 use S3DB\Sync\Filesystems\LocalFilesystem;
@@ -179,6 +181,80 @@ abstract class AbstractSyncer
             ByteSize::formatMetric(
                 $this->localFilesystem->fileSize($dumpFile)
             )
+        ));
+    }
+
+    public function prune($dryRun = true) : void {
+        $timeAgo = new TimeAgo();
+        $buckets = [];
+
+        // Organise each file into buckets
+        $allFiles = $this->storageFilesystem->listContents(".",  FilesystemReader::LIST_DEEP)->toArray();
+        foreach($allFiles as $file){
+            $date = (new Carbon())->setTimestamp($file['lastModified']);
+            $buckets[$timeAgo->inWords($date)][$date->format("Y-m-d H:i:s")] = $file;
+            ksort($buckets[$timeAgo->inWords($date)]);
+        }
+
+        // Sift each bucket to get the newest file...
+        $this->logger->debug(sprintf(
+            "%s  Sifting %d buckets of %d items...",
+            Emoji::beachWithUmbrella(),
+            count($buckets),
+            count($allFiles)
+        ));
+        $siftedBuckets = [];
+        foreach($buckets as $bucketName => $bucketOptions){
+            $siftedBuckets[$bucketName] = reset($bucketOptions);
+        }
+
+        // Build a list to save...
+        $saveList = [];
+        foreach($siftedBuckets as $bucketName => $selectedFile){
+            /** @var FileAttributes $selectedFile */
+            $saveList[] = $selectedFile->path();
+            $this->logger->debug(sprintf(
+                "%s Saving %s from %s",
+                Emoji::smilingFaceWithHalo(),
+                $selectedFile->path(),
+                $timeAgo->inWords((new Carbon())->setTimestamp($selectedFile->lastModified()))
+            ));
+        }
+        // Build the culling list
+        $cullingList = [];
+        foreach($allFiles as $file){
+            /** @var FileAttributes $file */
+            if(!in_array($file->path(), $saveList)){
+                $cullingList[] = $file;
+                $this->logger->info(sprintf(
+                    " %s  Culling %s from %s",
+                    Emoji::recyclingSymbol(),
+                    $file->path(),
+                    $timeAgo->inWords((new Carbon())->setTimestamp($file->lastModified()))
+                ));
+            }
+        }
+
+        $freedBytes= 0;
+        foreach($cullingList as $fileToCull){
+            /** @var FileAttributes $fileToCull */
+            $freedBytes += $this->storageFilesystem->fileSize($fileToCull->path());
+            $this->logger->debug(sprintf(
+                "%s Deleting %s saving %s.",
+                Emoji::fire(),
+                $fileToCull->path(),
+                ByteSize::formatMetric($fileToCull->fileSize())
+            ));
+            if(!$dryRun) {
+                $this->storageFilesystem->delete($fileToCull->path());
+            }
+        }
+
+        $this->logger->info(sprintf(
+            " %s Deleted %d files and saved %s disk space",
+            Emoji::trumpet(),
+            count($cullingList),
+            ByteSize::formatMetric($freedBytes)
         ));
     }
 }

@@ -30,6 +30,8 @@ class Sync
             ->opt('mysql', 'mysql mode')
             ->opt('push', 'push to s3')
             ->opt('pull', 'pull from s3')
+            ->opt('prune', 'comb and prune the s3 bucket backups to reduce storage mass')
+            ->opt('dry-run', 'do not actually delete things')
         ;
         $this->args = $this->cli->parse($environment['argv'], true);
 
@@ -60,11 +62,14 @@ class Sync
     public function run(): void
     {
         if ($this->args->hasOpt('push')) {
-            $this->logger->debug(sprintf('%s  Running push', Emoji::upArrow()));
+            $this->logger->info(sprintf(' %s  Running push', Emoji::upArrow()));
             $this->syncer->push();
         } elseif ($this->args->hasOpt('pull')) {
-            $this->logger->debug(sprintf('%s  Running pull', Emoji::downArrow()));
+            $this->logger->info(sprintf(' %s  Running pull', Emoji::downArrow()));
             $this->syncer->pull();
+        } elseif ($this->args->hasOpt('prune')) {
+            $this->logger->info(sprintf(' %s  Running pruner', Emoji::recyclingSymbol()));
+            $this->syncer->prune($this->args->hasOpt('dry-run'));
         } else {
             $this->logger->critical(sprintf('%s Must be run in either --push or --pull mode!', Emoji::CHARACTER_NERD_FACE));
 
