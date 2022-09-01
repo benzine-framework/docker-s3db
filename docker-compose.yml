@@ -42,8 +42,8 @@ services:
       - "127.0.0.127:5432:5432"
     depends_on:
       - minio
-#    volumes:
-#      - ./:/sync
+    volumes:
+      - ./:/sync
 
   mariadb-10.9:
     image: benzine/mysql:10.9
@@ -68,8 +68,8 @@ services:
       - "127.0.0.127:3306:3306"
     depends_on:
       - minio
-#    volumes:
-#      - ./:/sync
+    volumes:
+      - ./:/sync
 
   mariadb-10.3:
     image: benzine/mysql:10.3
@@ -85,5 +85,5 @@ services:
       - "127.0.0.127:3306:3306"
     depends_on:
       - minio
-#    volumes:
-#      - ./:/sync
+    volumes:
+      - ./:/sync

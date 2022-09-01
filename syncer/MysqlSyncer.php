@@ -10,7 +10,7 @@ class MysqlSyncer extends AbstractSyncer
     {
         // Dump file from Postgres
         $dumpFile = 'dump.sql';
-        $command = sprintf('mysqldump -u $MARIADB_USER -p$MARIADB_PASSWORD --extended-insert --quick --add-locks --add-drop-database --add-drop-table --add-drop-trigger $MARIADB_DATABASE > /dumps/%s', $dumpFile);
+        $command = sprintf('mysqldump -u $MARIADB_USER -p$MARIADB_PASSWORD --extended-insert --quick --add-locks --add-drop-database --add-drop-table --add-drop-trigger --skip-dump-date $MARIADB_DATABASE > /dumps/%s', $dumpFile);
         passthru($command);
 
         // Verify the dump worked
