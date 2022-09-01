@@ -2,7 +2,6 @@
 
 namespace S3DB\Sync;
 
-use Rych\ByteSize\ByteSize;
 use Spatie\Emoji\Emoji;
 
 class MysqlSyncer extends AbstractSyncer
@@ -15,31 +14,10 @@ class MysqlSyncer extends AbstractSyncer
         passthru($command);
 
         // Verify the dump worked
-        if (!$this->localFilesystem->fileExists($dumpFile)) {
-            $this->logger->critical('Database dump failed');
-
-            exit;
-        }
-        $this->logger->debug(sprintf(
-            'Dump file was made, and is %s uncompressed',
-            ByteSize::formatMetric(
-                $this->localFilesystem->fileSize($dumpFile)
-            )
-        ));
+        $this->verifyDumpSucceeded($dumpFile);
 
         // Checksum dump and don't upload if the checksum is the same as last time.
-        $hash = sha1_file("/dumps/{$dumpFile}");
-        if ($this->localFilesystem->has('previous_hash') && $hash == $this->localFilesystem->read('previous_hash')) {
-            $this->logger->debug(sprintf(
-                '%s Dump of %s matches previous dump (%s), not uploading the same file again.',
-                Emoji::abacus(),
-                $dumpFile,
-                substr($hash, 0, 7)
-            ));
-
-            exit;
-        }
-        $this->localFilesystem->write('previous_hash', $hash);
+        $this->checksumCheck($dumpFile);
 
         // XZ compress dump
         $compressedDumpFile = $this->compress($dumpFile);

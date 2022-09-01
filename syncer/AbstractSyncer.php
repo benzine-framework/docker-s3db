@@ -37,6 +37,7 @@ abstract class AbstractSyncer
             count($filesInS3),
             $showLimit
         ));
+
         /** @var FileAttributes $file */
         foreach (array_slice($filesInS3, 0, $showLimit) as $file) {
             $this->logger->debug(sprintf(
@@ -142,5 +143,42 @@ abstract class AbstractSyncer
         ));
 
         return $uncompressedFile;
+    }
+
+    protected function checksumCheck($dumpFile): void
+    {
+        // Checksum dump and don't upload if the checksum is the same as last time.
+        $hash = sha1_file("/dumps/{$dumpFile}");
+        if ($this->localFilesystem->has('previous_hash') && $hash == $this->localFilesystem->read('previous_hash')) {
+            $this->logger->debug(sprintf(
+                '%s Dump of %s matches previous dump (%s), not uploading the same file again.',
+                Emoji::abacus(),
+                $dumpFile,
+                substr($hash, 0, 7)
+            ));
+
+            exit;
+        }
+        $this->localFilesystem->write('previous_hash', $hash);
+    }
+
+    protected function verifyDumpSucceeded($dumpFile): void
+    {
+        if (!$this->localFilesystem->fileExists($dumpFile)) {
+            $this->logger->critical('Database dump failed');
+
+            exit;
+        }
+        if (!$this->localFilesystem->fileSize($dumpFile) > 0) {
+            $this->logger->critical('Dump file was created, but was empty.');
+
+            exit;
+        }
+        $this->logger->debug(sprintf(
+            'Dump file was made, and is %s uncompressed',
+            ByteSize::formatMetric(
+                $this->localFilesystem->fileSize($dumpFile)
+            )
+        ));
     }
 }
