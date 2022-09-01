@@ -1,6 +1,5 @@
 All:
  * S3 pruner
- * Push on termination
 PostgreSQL:
  * 
 MariaDB:
