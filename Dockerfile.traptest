@@ -1,0 +1,6 @@
+FROM ubuntu:jammy AS mariadb-traptest
+COPY traptest.sh /usr/local/bin/traptest
+RUN chmod +x /usr/local/bin/traptest
+ENTRYPOINT ["/usr/local/bin/traptest"]
+CMD []
+STOPSIGNAL SIGINT

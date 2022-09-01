@@ -50,24 +50,17 @@ COPY sync-push.runit /etc/service/sync-push/run
 VOLUME /dumps
 WORKDIR /sync
 COPY composer.* /sync/
+RUN composer install
 COPY syncer /sync/syncer
 COPY sync /sync/sync
 COPY start.sh /sync/start.sh
-RUN composer install
 ENV PATH="/sync:${PATH}"
 RUN ln -s /sync/vendor/bin/wait-for-mariadb /usr/local/bin/wait-for-database && \
     chmod +x /sync/sync /etc/service/*/run
-ENTRYPOINT ["/bin/bash", "/sync/start.sh"]
-CMD ["/bin/bash", "/sync/start.sh"]
+ENTRYPOINT ["/sync/start.sh"]
+CMD []
 HEALTHCHECK --start-period=30s \
     CMD /usr/local/bin/healthcheck.sh \
         --defaults-extra-file=/etc/healthcheck.cnf \
         --connect
-
-FROM mariadb AS mariadb-traptest
-COPY traptest.sh /usr/local/bin/traptest
-#STOPSIGNAL SIGINT
-RUN chmod +x /usr/local/bin/traptest
-#CMD ["/usr/local/bin/traptest"]
-ENTRYPOINT ["/usr/local/bin/traptest"]
-#ENTRYPOINT []
+STOPSIGNAL SIGTERM

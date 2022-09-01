@@ -54,22 +54,17 @@ COPY sync-push.runit /etc/service/sync-push/run
 VOLUME /dumps
 WORKDIR /sync
 COPY composer.* /sync/
+RUN composer install
 COPY syncer /sync/syncer
 COPY sync /sync/sync
 COPY start.sh /sync/start.sh
 COPY postgres_healthcheck.sh /usr/local/bin/postgres_healthcheck
-RUN composer install
 ENV PATH="/sync:${PATH}"
 RUN ln -s /sync/vendor/bin/wait-for-postgresql /usr/local/bin/wait-for-database && \
     chmod +x /sync/sync /etc/service/*/run /usr/local/bin/postgres_healthcheck
 ENTRYPOINT ["/bin/bash", "/sync/start.sh"]
-STOPSIGNAL SIGINT
-CMD ["/bin/bash", "/sync/start.sh"]
+CMD []
 HEALTHCHECK --start-period=30s \
     CMD /usr/local/bin/postgres_healthcheck
+STOPSIGNAL SIGTERM
 
-FROM postgres AS postgres-traptest
-COPY traptest.sh /usr/local/bin/traptest
-RUN chmod +x /usr/local/bin/traptest
-CMD []
-ENTRYPOINT ["/usr/local/bin/traptest"]

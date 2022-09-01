@@ -26,6 +26,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.postgres
+      target: postgres
       args:
         PGSQL_VERSION: 14
     environment:
@@ -49,6 +50,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.mariadb
+      target: mariadb
       args:
         MARIADB_VERSION: 10.9
     environment: &mariadb
@@ -74,6 +76,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.mariadb
+      target: mariadb
       args:
         MARIADB_VERSION: 10.3
     environment:
