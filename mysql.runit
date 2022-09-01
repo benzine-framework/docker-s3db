@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Create /etc/my.cnf to allow internal utils to JustWork:tm:
+echo "[mariadb-client]" > /etc/my.cnf
+echo "user = $MARIADB_USER" >> /etc/my.cnf
+echo "password = $MARIADB_PASSWORD" >> /etc/my.cnf
+
+# Call upstreamed mariadb entrypoint.
 echo "Running docker-entrypoint"
 /usr/local/bin/docker-entrypoint.sh mariadbd
 
