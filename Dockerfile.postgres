@@ -1,5 +1,5 @@
 ARG PGSQL_VERSION
-FROM postgres:$PGSQL_VERSION-alpine
+FROM postgres:$PGSQL_VERSION-alpine AS postgres
 RUN apk add --no-cache runit && \
     apk --no-cache --repository https://dl-cdn.alpinelinux.org/alpine/edge/main add \
       icu-libs \
@@ -57,10 +57,19 @@ COPY composer.* /sync/
 COPY syncer /sync/syncer
 COPY sync /sync/sync
 COPY start.sh /sync/start.sh
-ENV PATH="/sync:${PATH}"
-ENTRYPOINT ["start.sh"]
-#CMD ["start.sh"]
+COPY postgres_healthcheck.sh /usr/local/bin/postgres_healthcheck
 RUN composer install
-COPY postgres_healthcheck /sync/postgres_healthcheck
-HEALTHCHECK --start-period=30s CMD /sync/postgres_healthcheck
-RUN ln -s /sync/vendor/bin/wait-for-postgresql /usr/local/bin/wait-for-database
+ENV PATH="/sync:${PATH}"
+RUN ln -s /sync/vendor/bin/wait-for-postgresql /usr/local/bin/wait-for-database && \
+    chmod +x /sync/sync /etc/service/*/run /usr/local/bin/postgres_healthcheck
+ENTRYPOINT ["/bin/bash", "/sync/start.sh"]
+STOPSIGNAL SIGINT
+CMD ["/bin/bash", "/sync/start.sh"]
+HEALTHCHECK --start-period=30s \
+    CMD /usr/local/bin/postgres_healthcheck
+
+FROM postgres AS postgres-traptest
+COPY traptest.sh /usr/local/bin/traptest
+RUN chmod +x /usr/local/bin/traptest
+CMD []
+ENTRYPOINT ["/usr/local/bin/traptest"]

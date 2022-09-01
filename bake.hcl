@@ -26,6 +26,7 @@ target "postgres-14" {
   args = {
     PGSQL_VERSION = 14
   }
+  target = "postgres"
 }
 
 target "postgres-13" {
@@ -36,6 +37,7 @@ target "postgres-13" {
   args = {
     PGSQL_VERSION = 13
   }
+  target = "postgres"
 }
 
 target "postgres-12" {
@@ -46,6 +48,7 @@ target "postgres-12" {
   args = {
     PGSQL_VERSION = 12
   }
+  target = "postgres"
 }
 
 target "postgres-11" {
@@ -56,6 +59,7 @@ target "postgres-11" {
   args = {
     PGSQL_VERSION = 11
   }
+  target = "postgres"
 }
 
 target "postgres-10" {
@@ -66,6 +70,7 @@ target "postgres-10" {
   args = {
     PGSQL_VERSION = 10
   }
+  target = "postgres"
 }
 
 target "mariadb-10-9" {
@@ -79,6 +84,7 @@ target "mariadb-10-9" {
   args = {
     MARIADB_VERSION=10.9
   }
+  target = "mariadb"
 }
 target "mariadb-10-8" {
   context = "."
@@ -88,6 +94,7 @@ target "mariadb-10-8" {
   args = {
     MARIADB_VERSION=10.8
   }
+  target = "mariadb"
 }
 target "mariadb-10-7" {
   context = "."
@@ -97,6 +104,7 @@ target "mariadb-10-7" {
   args = {
     MARIADB_VERSION=10.7
   }
+  target = "mariadb"
 }
 target "mariadb-10-6" {
   context = "."
@@ -106,6 +114,7 @@ target "mariadb-10-6" {
   args = {
     MARIADB_VERSION=10.6
   }
+  target = "mariadb"
 }
 target "mariadb-10-5" {
   context = "."
@@ -115,6 +124,7 @@ target "mariadb-10-5" {
   args = {
     MARIADB_VERSION=10.5
   }
+  target = "mariadb"
 }
 target "mariadb-10-4" {
   context = "."
@@ -124,6 +134,7 @@ target "mariadb-10-4" {
   args = {
     MARIADB_VERSION=10.4
   }
+  target = "mariadb"
 }
 target "mariadb-10-3" {
   context = "."
@@ -133,4 +144,5 @@ target "mariadb-10-3" {
   args = {
     MARIADB_VERSION=10.3
   }
+  target = "mariadb"
 }

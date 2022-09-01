@@ -1,5 +1,5 @@
 ARG MARIADB_VERSION=10.9
-FROM mariadb:$MARIADB_VERSION
+FROM mariadb:$MARIADB_VERSION AS mariadb
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 ENV DEBIAN_FRONTEND="teletype" \
     TERM=xterm-256color \
@@ -55,8 +55,19 @@ COPY sync /sync/sync
 COPY start.sh /sync/start.sh
 RUN composer install
 ENV PATH="/sync:${PATH}"
-RUN chmod +x /sync/sync /etc/service/*/run
+RUN ln -s /sync/vendor/bin/wait-for-mariadb /usr/local/bin/wait-for-database && \
+    chmod +x /sync/sync /etc/service/*/run
 ENTRYPOINT ["/bin/bash", "/sync/start.sh"]
-#CMD ["start.sh"]
-HEALTHCHECK --start-period=30s CMD /usr/local/bin/healthcheck.sh --connect
-RUN ln -s /sync/vendor/bin/wait-for-mysql /usr/local/bin/wait-for-database
+CMD ["/bin/bash", "/sync/start.sh"]
+HEALTHCHECK --start-period=30s \
+    CMD /usr/local/bin/healthcheck.sh \
+        --defaults-extra-file=/etc/healthcheck.cnf \
+        --connect
+
+FROM mariadb AS mariadb-traptest
+COPY traptest.sh /usr/local/bin/traptest
+#STOPSIGNAL SIGINT
+RUN chmod +x /usr/local/bin/traptest
+#CMD ["/usr/local/bin/traptest"]
+ENTRYPOINT ["/usr/local/bin/traptest"]
+#ENTRYPOINT []
