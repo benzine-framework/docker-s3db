@@ -10,6 +10,7 @@ RUN apk add --no-cache runit && \
     && \
     apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing/ --allow-untrusted gnu-libiconv \
         # Packages \
+        nano \
         curl \
         tini \
         php81 \
@@ -57,7 +58,8 @@ COPY syncer /sync/syncer
 COPY sync /sync/sync
 COPY start.sh /sync/start.sh
 ENV PATH="/sync:${PATH}"
-CMD ["start.sh"]
+ENTRYPOINT ["start.sh"]
+#CMD ["start.sh"]
 RUN composer install
 COPY postgres_healthcheck /sync/postgres_healthcheck
 HEALTHCHECK --start-period=30s CMD /sync/postgres_healthcheck
