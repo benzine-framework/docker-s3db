@@ -1,5 +1,5 @@
 ARG PGSQL_VERSION
-FROM postgres:$PGSQL_VERSION-alpine AS postgres
+FROM postgres:$PGSQL_VERSION-alpine
 RUN apk add --no-cache runit && \
     apk --no-cache --repository https://dl-cdn.alpinelinux.org/alpine/edge/main add \
       icu-libs \

@@ -26,7 +26,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.postgres
-      target: postgres
       args:
         PGSQL_VERSION: 14
     environment:
@@ -49,7 +48,6 @@ services:
     image: benzine/mysql:10.9
     build:
       context: .
-      target: mysql
       dockerfile: Dockerfile.mariadb
       args:
         MARIADB_VERSION: 10.9
@@ -75,7 +73,6 @@ services:
     image: benzine/mysql:10.3
     build:
       context: .
-      target: mysql
       dockerfile: Dockerfile.mariadb
       args:
         MARIADB_VERSION: 10.3

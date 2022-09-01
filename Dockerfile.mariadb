@@ -1,5 +1,5 @@
 ARG MARIADB_VERSION=10.9
-FROM mariadb:$MARIADB_VERSION AS mysql
+FROM mariadb:$MARIADB_VERSION
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 ENV DEBIAN_FRONTEND="teletype" \
     TERM=xterm-256color \
