@@ -10,6 +10,22 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        target:
+          - postgres-14
+          - postgres-13
+          - postgres-12
+          - postgres-11
+          - postgres-10
+          - mariadb-10-9
+          - mariadb-10-8
+          - mariadb-10-7
+          - mariadb-10-6
+          - mariadb-10-5
+          - mariadb-10-4
+          - mariadb-10-3
     steps:
       - name: Git Checkout
         uses: actions/checkout@v3
@@ -33,3 +49,4 @@ jobs:
         with:
           files: bake.hcl
           push: true
+          targets: ${{ matrix.target }}
