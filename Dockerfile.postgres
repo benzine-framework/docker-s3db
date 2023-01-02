@@ -44,7 +44,7 @@ RUN apk add --no-cache runit && \
         php81-pecl-apcu \
         ncurses \
         xz \
-    && ln -s /usr/bin/php81 /usr/bin/php
+    && ln -sf /usr/bin/php81 /usr/bin/php
 RUN curl https://getcomposer.org/composer-stable.phar --output /usr/local/bin/composer && \
     chmod +x /usr/local/bin/composer
 COPY start.sh /usr/local/bin/start.sh
