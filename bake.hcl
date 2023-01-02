@@ -15,6 +15,8 @@ group "default" {
   ]
 }
 
+
+
 target "postgres-14" {
   context = "."
   dockerfile = "Dockerfile.postgres"
@@ -73,13 +75,50 @@ target "postgres-10" {
   target = "postgres"
 }
 
+target "mariadb-10-11" {
+  context = "."
+  dockerfile = "Dockerfile.mariadb"
+  platforms = [
+    "arm64",
+    "amd64"
+  ]
+  tags = [
+    "benzine/mariadb:10.11",
+    "ghcr.io/benzine-framework/s3db:mariadb-10.11",
+  ]
+  args = {
+    MARIADB_VERSION=10.11
+  }
+  target = "mariadb"
+}
+
+target "mariadb-10-10" {
+  context = "."
+  dockerfile = "Dockerfile.mariadb"
+  platforms = [
+    "arm64",
+    "amd64"
+  ]
+  tags = [
+    "benzine/mariadb:10.10", "benzine/mariadb:latest",
+    "ghcr.io/benzine-framework/s3db:mariadb-10.10", "ghcr.io/benzine-framework/s3db:mariadb",
+  ]
+  args = {
+    MARIADB_VERSION=10.10
+  }
+  target = "mariadb"
+}
+
 target "mariadb-10-9" {
   context = "."
   dockerfile = "Dockerfile.mariadb"
-  platforms = ["arm64", "amd64"]
+  platforms = [
+    "arm64",
+    "amd64"
+  ]
   tags = [
-    "benzine/mariadb:10.9", "benzine/mariadb:latest",
-    "ghcr.io/benzine-framework/s3db:mariadb-10.9", "ghcr.io/benzine-framework/s3db:mariadb",
+    "benzine/mariadb:10.9",
+    "ghcr.io/benzine-framework/s3db:mariadb-10.9",
   ]
   args = {
     MARIADB_VERSION=10.9
