@@ -87,7 +87,7 @@ target "mariadb-10-11" {
     "ghcr.io/benzine-framework/s3db:mariadb-10.11",
   ]
   args = {
-    MARIADB_VERSION=10.11
+    MARIADB_VERSION=10.11-rc
   }
   target = "mariadb"
 }
