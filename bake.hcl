@@ -104,7 +104,7 @@ target "mariadb-10-10" {
     "ghcr.io/benzine-framework/s3db:mariadb-10.10", "ghcr.io/benzine-framework/s3db:mariadb",
   ]
   args = {
-    MARIADB_VERSION=10.10
+    MARIADB_VERSION="10.10"
   }
   target = "mariadb"
 }
@@ -121,7 +121,7 @@ target "mariadb-10-9" {
     "ghcr.io/benzine-framework/s3db:mariadb-10.9",
   ]
   args = {
-    MARIADB_VERSION=10.9
+    MARIADB_VERSION="10.9"
   }
   target = "mariadb"
 }
@@ -131,7 +131,7 @@ target "mariadb-10-8" {
   platforms = ["arm64", "amd64"]
   tags = ["benzine/mariadb:10.8", "ghcr.io/benzine-framework/s3db:mariadb-10.8"]
   args = {
-    MARIADB_VERSION=10.8
+    MARIADB_VERSION="10.8"
   }
   target = "mariadb"
 }
@@ -141,7 +141,7 @@ target "mariadb-10-7" {
   platforms = ["arm64", "amd64"]
   tags = ["benzine/mariadb:10.7", "ghcr.io/benzine-framework/s3db:mariadb-10.7"]
   args = {
-    MARIADB_VERSION=10.7
+    MARIADB_VERSION="10.7"
   }
   target = "mariadb"
 }
@@ -151,7 +151,7 @@ target "mariadb-10-6" {
   platforms = ["arm64", "amd64"]
   tags = ["benzine/mariadb:10.6", "ghcr.io/benzine-framework/s3db:mariadb-10.6"]
   args = {
-    MARIADB_VERSION=10.6
+    MARIADB_VERSION="10.6"
   }
   target = "mariadb"
 }
@@ -161,7 +161,7 @@ target "mariadb-10-5" {
   platforms = ["arm64", "amd64"]
   tags = ["benzine/mariadb:10.5", "ghcr.io/benzine-framework/s3db:mariadb-10.5"]
   args = {
-    MARIADB_VERSION=10.5
+    MARIADB_VERSION="10.5"
   }
   target = "mariadb"
 }
@@ -171,7 +171,7 @@ target "mariadb-10-4" {
   platforms = ["arm64", "amd64"]
   tags = ["benzine/mariadb:10.4", "ghcr.io/benzine-framework/s3db:mariadb-10.4"]
   args = {
-    MARIADB_VERSION=10.4
+    MARIADB_VERSION="10.4"
   }
   target = "mariadb"
 }
@@ -181,7 +181,7 @@ target "mariadb-10-3" {
   platforms = ["arm64", "amd64"]
   tags = ["benzine/mariadb:10.3", "ghcr.io/benzine-framework/s3db:mariadb-10.3"]
   args = {
-    MARIADB_VERSION=10.3
+    MARIADB_VERSION="10.3"
   }
   target = "mariadb"
 }
