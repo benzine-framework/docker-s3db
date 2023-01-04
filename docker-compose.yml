@@ -71,6 +71,23 @@ services:
     volumes:
       - ./:/sync
 
+  mariadb-10.7:
+    image: benzine/mysql:10.7
+    build:
+      context: .
+      dockerfile: Dockerfile.mariadb
+      target: mariadb
+      args:
+        MARIADB_VERSION: 10.7
+    environment:
+      <<: *mariadb
+    ports:
+      - "127.0.0.127:3306:3306"
+    depends_on:
+      - minio
+    volumes:
+      - ./:/sync
+
   mariadb-10.3:
     image: benzine/mysql:10.3
     build:
