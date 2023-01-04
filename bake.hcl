@@ -100,8 +100,8 @@ target "mariadb-10-10" {
     "amd64"
   ]
   tags = [
-    "benzine/mariadb:10.10", "benzine/mariadb:latest",
-    "ghcr.io/benzine-framework/s3db:mariadb-10.10", "ghcr.io/benzine-framework/s3db:mariadb",
+    "benzine/mariadb:10.10",
+    "ghcr.io/benzine-framework/s3db:mariadb-10.10",
   ]
   args = {
     MARIADB_VERSION="10.10"
@@ -117,8 +117,8 @@ target "mariadb-10-9" {
     "amd64"
   ]
   tags = [
-    "benzine/mariadb:10.9",
-    "ghcr.io/benzine-framework/s3db:mariadb-10.9",
+    "benzine/mariadb:10.9", "benzine/mariadb:latest",
+    "ghcr.io/benzine-framework/s3db:mariadb-10.9", "ghcr.io/benzine-framework/s3db:mariadb",
   ]
   args = {
     MARIADB_VERSION="10.9"
