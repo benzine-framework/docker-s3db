@@ -44,6 +44,12 @@ class Sync
         $this->storageFilesystem = new StorageFilesystem();
         $this->localFilesystem = new LocalFilesystem();
 
+        if(!isset($environment['S3_API_KEY']) || !isset($environment['S3_API_SECRET'])){
+            $this->logger->warning(sprintf('%s S3_API_KEY/S3_API_SECRET missing, so running in non-storing mode like a normal database.', Emoji::CHARACTER_NERD_FACE));
+            sleep(60);
+            exit;
+        }
+
         if ($this->args->hasOpt('postgres') || isset($environment['PG_VERSION'])) {
             // Postgres mode is enabled if --postgres is set, or PG_VERSION envvar is set,
             // which it is when we're built ontop of the postgres docker container
