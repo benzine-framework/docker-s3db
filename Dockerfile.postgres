@@ -1,5 +1,10 @@
 ARG PGSQL_VERSION
 FROM postgres:$PGSQL_VERSION-alpine AS postgres
+
+LABEL maintainer="Matthew Baggett <matthew@baggett.me>" \
+      org.label-schema.vcs-url="https://github.com/benzine-framework/docker-s3db" \
+      org.opencontainers.image.source="https://github.com/benzine-framework/docker-s3db"
+
 RUN apk add --no-cache runit && \
     apk --no-cache --repository https://dl-cdn.alpinelinux.org/alpine/edge/main add \
       icu-libs \

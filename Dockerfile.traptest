@@ -1,4 +1,9 @@
 FROM ubuntu:jammy AS mariadb-traptest
+
+LABEL maintainer="Matthew Baggett <matthew@baggett.me>" \
+      org.label-schema.vcs-url="https://github.com/benzine-framework/docker-s3db" \
+      org.opencontainers.image.source="https://github.com/benzine-framework/docker-s3db"
+
 COPY traptest.sh /usr/local/bin/traptest
 RUN chmod +x /usr/local/bin/traptest
 ENTRYPOINT ["/usr/local/bin/traptest"]

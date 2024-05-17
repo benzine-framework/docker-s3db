@@ -1,5 +1,10 @@
 ARG MARIADB_VERSION
 FROM mariadb:$MARIADB_VERSION AS mariadb
+
+LABEL maintainer="Matthew Baggett <matthew@baggett.me>" \
+      org.label-schema.vcs-url="https://github.com/benzine-framework/docker-s3db" \
+      org.opencontainers.image.source="https://github.com/benzine-framework/docker-s3db"
+
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 ENV DEBIAN_FRONTEND="teletype" \
     TERM=xterm-256color \
