@@ -4,3 +4,4 @@
 /.minio
 /test.yml
 /.secrets
+/.github/cache
