@@ -53,7 +53,6 @@ jobs:
           docker_hub_token: ${{ secrets.DOCKER_HUB_TOKEN }}
 
       - name: "Setup: Login to Private Registry"
-        if: secrets.PRIVATE_REGISTRY
         uses: docker/login-action@v3
         with:
           registry: ${{ secrets.PRIVATE_REGISTRY }}

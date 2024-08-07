@@ -1,3 +1,4 @@
+# checkov:skip=CKV_DOCKER_3 user cannot be determined at this stage.
 FROM ubuntu:jammy AS mariadb-traptest
 
 LABEL maintainer="Matthew Baggett <matthew@baggett.me>" \
@@ -8,4 +9,5 @@ COPY traptest.sh /usr/local/bin/traptest
 RUN chmod +x /usr/local/bin/traptest
 ENTRYPOINT ["/usr/local/bin/traptest"]
 CMD []
+HEALTHCHECK NONE # Healthchecks are not relevant for this image
 STOPSIGNAL SIGINT

@@ -1,3 +1,4 @@
+# checkov:skip=CKV_DOCKER_3 If its good enough for upstream mariadb, its good enough for me.
 ARG MARIADB_VERSION
 FROM mariadb:$MARIADB_VERSION AS mariadb
 

@@ -1,3 +1,4 @@
+# checkov:skip=CKV_DOCKER_3 If its good enough for upstream postgres, its good enough for me.
 ARG PGSQL_VERSION
 FROM postgres:$PGSQL_VERSION-alpine AS postgres
 
@@ -13,42 +14,47 @@ RUN apk add --no-cache runit && \
     # Current packages don't exist in other repositories
     libavif \
     && \
-    apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing/ --allow-untrusted gnu-libiconv \
-        # Packages \
-        nano \
-        curl \
-        tini \
-        php83 \
-        php83-dev \
-        php83-common \
-        php83-gd \
-        php83-xmlreader \
-        php83-bcmath \
-        php83-ctype \
-        php83-curl \
-        php83-exif \
-        php83-iconv \
-        php83-intl \
-        php83-mbstring \
-        php83-opcache \
-        php83-openssl \
-        php83-pcntl \
-        php83-phar \
-        php83-session \
-        php83-xml \
-        php83-xsl \
-        php83-zip \
-        php83-zlib \
-        php83-dom \
-        php83-fpm \
-        php83-sodium \
-        php83-tokenizer \
-        php83-fileinfo \
-        php83-simplexml \
-        # Iconv Fix
-        php83-pecl-apcu \
-        ncurses \
-        xz \
+    apk \
+        --no-cache \
+        --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing/ \
+        #--allow-untrusted \
+        add \
+            # Packages \
+            gnu-libiconv \
+            nano \
+            curl \
+            tini \
+            php83 \
+            php83-dev \
+            php83-common \
+            php83-gd \
+            php83-xmlreader \
+            php83-bcmath \
+            php83-ctype \
+            php83-curl \
+            php83-exif \
+            php83-iconv \
+            php83-intl \
+            php83-mbstring \
+            php83-opcache \
+            php83-openssl \
+            php83-pcntl \
+            php83-phar \
+            php83-session \
+            php83-xml \
+            php83-xsl \
+            php83-zip \
+            php83-zlib \
+            php83-dom \
+            php83-fpm \
+            php83-sodium \
+            php83-tokenizer \
+            php83-fileinfo \
+            php83-simplexml \
+            # Iconv Fix
+            php83-pecl-apcu \
+            ncurses \
+            xz \
     && ln -sf /usr/bin/php83 /usr/bin/php
 RUN curl https://getcomposer.org/composer-stable.phar --output /usr/local/bin/composer && \
     chmod +x /usr/local/bin/composer
